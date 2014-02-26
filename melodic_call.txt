@@ -1,0 +1,5 @@
+/usr/local/fsl-5.0.1/bin/melodic -i .filelist -o groupmelodic.ica -v --nobet --bgthreshold=10 --tr=2.2000000477 --report --guireport=report.html --bgimage=bg_image -d 0 --mmthresh=0.5 --Ostats -a concat
+
+melodic -i ./OldYoungICA_IC0.gica/.filelist.txt -o ./OldYoungICA_IC0.gica/groupmelodic.ica -v --nobet --bgthreshold=10 --tr=2.2000000477 --report --guireport=./OldYoungICA_IC0.gica/report.html --bgimage=./OldYoungICA_IC0.gica/bg_image.nii.gz -d 0 --mmthresh=0.5 --Ostats -a concat 
+
+
