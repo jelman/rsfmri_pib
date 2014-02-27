@@ -18,7 +18,8 @@ if __name__ == '__main__':
     youngdata = data[data['Group']=='Young']
     
     for roi in data.columns[7:]:
-        outfile = os.path.join(datadir, roi + '.svg')
+        outfile = os.path.join(datadir, roi + '.jpg')
+        outfile = outfile.replace(': ','_')
         gp.plot_scatter(olddata, 'PIB_Index_log', roi, covariates, 
                     outfile, xlabel='PiB Index (log)', 
                     ylabel='Functional Connectivity', title=roi) 
