@@ -38,6 +38,7 @@ if __name__ == '__main__':
     subinfo = pd.read_csv(subinfofile, sep='\t')
 
     for subj in subinfo['SUBID']:
+        print "Copying data for subject {0}...".format(subj)
            
         sub_pibpath = bacspet
         
@@ -68,9 +69,13 @@ if __name__ == '__main__':
         dvrfile = glob(globstr)[0]
         
         # Get coreg directory
-        globstr = os.path.join(subpibdir, 'coreg*')
-        coregdir = glob(globstr)[0]
-        
+        if subinfo[subinfo.SUBID==subj]['SCANNER'].item()=='biograph':
+            globstr = os.path.join(subpibdir, 'coreg*')
+            coregdir = glob(globstr)[0]
+        else:
+            globstr = os.path.join(subpibdir, 'realign_QA')
+            coregdir = glob(globstr)[0]
+            
         #Find mean20min image
         globstr = os.path.join(coregdir, 'mean20min*')
         mean20minfile = glob(globstr)[0]
