@@ -67,14 +67,30 @@ if __name__ == '__main__':
         globstr = os.path.join(dvrdir, 'DVR*')
         dvrfile = glob(globstr)[0]
         
+        # Get coreg directory
+        globstr = os.path.join(subpibdir, 'coreg*')
+        coregdir = glob(globstr)[0]
+        
+        #Find mean20min image
+        globstr = os.path.join(coregdir, 'mean20min*')
+        mean20minfile = glob(globstr)[0]
+                
+        
         # Make pib directory
         subdatadir = os.path.join(datadir, subj)
         
         exists, newpibdir = make_dir(subdatadir, 'pib')
-
+        
+        # Copy dvr file and rename
         shutil.copy(dvrfile, newpibdir)
         unzipped_dvr = unzip(os.path.join(newpibdir, os.path.basename(dvrfile)))
         new_dvr_name = os.path.join(newpibdir, '_'.join([subj, 'dvr.nii']))
         shutil.move(unzipped_dvr, new_dvr_name)
+        
+        # Copy mean20min file and rename
+        shutil.copy(mean20minfile, newpibdir)
+        unzipped_mean20min = unzip(os.path.join(newpibdir, os.path.basename(mean20minfile)))
+        new_mean20min_name = os.path.join(newpibdir, '_'.join([subj, 'mean20min.nii']))
+        shutil.move(unzipped_mean20min, new_mean20min_name)        
         
 
