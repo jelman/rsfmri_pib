@@ -42,20 +42,20 @@ if __name__ == '__main__':
         sub_pibpath = bacspet
         
         # Determine whether subject is in YOUNG subfolder or not
-        if subinfo[subinfo.SUBID==subj]['AGE']=='young':
+        if subinfo[subinfo.SUBID==subj]['AGE'].item()=='young':
             sub_pibpath = os.path.join(sub_pibpath, 'young')
         else:
             sub_pibpath = os.path.join(sub_pibpath, 'old')
             #Determine whether subject is in BIOGRAPH folder
-        if subinfo[subinfo.SUBID==subj]['SCANNER']=='biograph':
+        if subinfo[subinfo.SUBID==subj]['SCANNER'].item()=='biograph':
             sub_pibpath = os.path.join(sub_pibpath, 'biograph')
         else:
             sub_pibpath = os.path.join(sub_pibpath, 'ecat')
             
         # Determine which PIB session to grab data from
-        if subinfo[subinfo.SUBID==subj]['PIB_SESSION']=='PIB':
+        if subinfo[subinfo.SUBID==subj]['PIB_SESSION'].item()=='PIB':
             pibsess = '_'.join([subj, 'v1'])
-        elif subinfo[subinfo.SUBID==subj]['PIB_SESSION']=='PIB2':
+        elif subinfo[subinfo.SUBID==subj]['PIB_SESSION'].item()=='PIB2':
             pibsess = '_'.join([subj, 'v2'])
 
         subpibdir = os.path.join(sub_pibpath, pibsess, 'pib')
