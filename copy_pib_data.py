@@ -62,19 +62,30 @@ if __name__ == '__main__':
         subpibdir = os.path.join(sub_pibpath, pibsess, 'pib')
         # Get dvr directory
         globstr = os.path.join(subpibdir, 'dvr*')
-        dvrdir = glob(globstr)[0]
+        dvrdir = sorted(glob(globstr))[0]
         
         # Find dvr image
         globstr = os.path.join(dvrdir, 'DVR*')
+        try:
+            dvrdir = glob(globstr)[0]
+        except IndexError:
+            print "DVR image not found for subject {0}".format(subj)
+
         dvrfile = glob(globstr)[0]
         
         # Get coreg directory
         if subinfo[subinfo.SUBID==subj]['SCANNER'].item()=='biograph':
             globstr = os.path.join(subpibdir, 'coreg*')
-            coregdir = glob(globstr)[0]
+            try:
+                coregdir = glob(globstr)[0]
+            except IndexError:
+                print "mean20min image not found for subject {0}".format(subj)
         else:
             globstr = os.path.join(subpibdir, 'realign_QA')
-            coregdir = glob(globstr)[0]
+            try:
+                coregdir = glob(globstr)[0]
+            except IndexError:
+                print "mean20min image not found for subject {0}".format(subj)
             
         #Find mean20min image
         globstr = os.path.join(coregdir, 'mean20min*')
